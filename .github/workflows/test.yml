@@ -19,10 +19,9 @@ jobs:
           node-version: '14'
 
       - name: Install Dependencies
-        run: |
-          npm install
-          npm install coveralls --save-dev  # Install coveralls as a dev dependency
+        run: npm install
 
       - name: Run Tests with Coverage
-        run: npm test -- --coverage --coverageReporters=text-lcov | coveralls
-
+        run: |
+          npm test -- --coverage --coverageReporters=text-lcov > coverage.txt
+          ./node_modules/.bin/coveralls < coverage.txt
