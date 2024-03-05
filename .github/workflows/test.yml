@@ -1,14 +1,12 @@
-name: Test and Deploy Workflow
+name: Test and Coverage Workflow
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
-  build_and_test:
-    name: Build and Test
+  test_and_coverage:
+    name: Test and Coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -23,5 +21,5 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Tests
-        run: npm test
+      - name: Run Tests with Coverage
+        run: npm test -- --coverage --coverageReporters=text-lcov | coveralls
